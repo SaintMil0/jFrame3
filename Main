@@ -1,0 +1,43 @@
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Main extends JFrame {
+    public static void main(String[] args) {
+        // Create the frame
+        JFrame frame = new JFrame("Distance Converter (Spinner)");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+
+        // Label
+        JLabel milesLabel = new JLabel("Distance (miles):");
+        milesLabel.setBounds(10, 10, 120, 25);
+        frame.add(milesLabel);
+
+        // Spinner for input
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0, 0.0, 10000.0, 0.1);
+        JSpinner milesSpinner = new JSpinner(spinnerModel);
+        milesSpinner.setBounds(140, 10, 120, 25);
+        frame.add(milesSpinner);
+
+        JButton convertButton = new JButton("Convert");
+        convertButton.setBounds(80, 50, 120, 30);
+        frame.add(convertButton);
+
+        JLabel kmLabel = new JLabel("Kilometers: ");
+        kmLabel.setBounds(10, 100, 250, 25);
+        frame.add(kmLabel);
+
+        // Action Listener
+        convertButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                double miles = (Double) milesSpinner.getValue();
+                double kilometers = miles * 1.60934;
+                kmLabel.setText(String.format("Kilometers: %.2f km", kilometers));
+            }
+        });
+
+        // Show frame
+        frame.setVisible(true);
+    }
+}
